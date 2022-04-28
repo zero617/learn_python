@@ -2,18 +2,26 @@ import cv2
 import numpy as np
 from PIL import Image
 
-raw_ = cv2.imread("2.jpg")
-raw = cv2.cvtColor(raw_, cv2.COLOR_BGR2RGB)
-raw_cp = raw.copy()
-raw_gray = cv2.cvtColor(raw, cv2.COLOR_RGB2GRAY)
-edges = cv2.Canny(raw_gray, 125, 350)
-image1 = Image.fromarray(raw.astype('uint8')).convert('RGB')
-cv2.imshow('image1', img)
-cv2.waitkey(0)
+img_ = cv2.imread("2.jpg")
+img = cv2.cvtColor(img_, cv2.COLOR_BGR2RGB)
+img_cp = img.copy()
+img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+edges = cv2.Canny(img_gray, 125, 350)
+image1 = Image.fromarray(img.astype('uint8')).convert('RGB')
+image1_1 = np.array(image1)
+cv2.imshow('img', image1_1)
+cv2.waitKey(0)
 # image1.show()
 image2 = Image.fromarray(edges.astype('uint8')).convert('RGB')
-# image2.show()
-image2.save("heibai.png")
+# image2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# ret, image2 = cv2.threshold(image2, 127, 255, cv2.THRESH_BINARY)
+image2_1 = np.array(image2)
+cv2.imshow('img', image2_1)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+# image2.save("heibai.png")
+
+'''
 lines = cv2.HoughLinesP(edges,  # 输入图像
                         1,  # 累加器分辨率
                         np.pi / 180,  # 角度分辨率
@@ -22,19 +30,24 @@ lines = cv2.HoughLinesP(edges,  # 输入图像
                         maxLineGap=20)  # 直线上允许的最大缝隙
 line = lines[:, 0, :]
 for x1, y1, x2, y2 in line[:]:
-    cv2.line(raw,  # 输入图像
+    cv2.line(img,  # 输入图像
              (x1, y1),  # 起点
              (x2, y2),  # 终点
              (255, 0, 0),  # 颜色
              1)  # 宽度
-image1 = Image.fromarray(raw.astype('uint8')).convert('RGB')
+image1 = Image.fromarray(img.astype('uint8')).convert('RGB')
+image1_1 = np.array(image1)
+cv2.imshow('img', image1_1)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 # image1.show()
-image1.save("nihe.png")
+# image1.save("nihe.png")
+'''
 
 '''
 # 在黑色图像上画一条白线，
 # 并且穿过用于检测直线的 Canny 轮廓图。结果是包含了与指定直线相关点的图像
-one_line = np.zeros(raw.shape, dtype=np.uint8)
+one_line = np.zeros(img.shape, dtype=np.uint8)
 cv2.line(one_line, (line[0][0], line[0][1]), (line[0][2], line[0][3]), (255, 255, 255), 3)
 # 拆分单通道
 B, G, R = cv2.split(one_line)
@@ -58,6 +71,6 @@ output = cv2.fitLine(points,  # 输入点集 矩阵形式
                      0.01,  # 径向精度
                      0.01)  # 角度精度
 # 这个fitLine拟合的有点问题 暂时还没找到原因
-image5 = Image.fromarray(raw_cp.astype('uint8')).convert('RGB')
+image5 = Image.fromarray(img_cp.astype('uint8')).convert('RGB')
 image5.show()
 '''
