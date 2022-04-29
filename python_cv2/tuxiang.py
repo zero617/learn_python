@@ -1,27 +1,27 @@
 import cv2
 import numpy as np
-from PIL import Image
 
-img_ = cv2.imread("2.jpg")
-img = cv2.cvtColor(img_, cv2.COLOR_BGR2RGB)
-img_cp = img.copy()
-img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+# from PIL import Image
+
+
+def cv_show(name, img):
+    cv2.imshow(name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+img__ = cv2.imread("2.jpg")
+img_ = cv2.cvtColor(img__, cv2.COLOR_BGR2RGB)
+img_cp = img_.copy()
+img_gray = cv2.cvtColor(img_, cv2.COLOR_RGB2GRAY)
 edges = cv2.Canny(img_gray, 125, 350)
-image1 = Image.fromarray(img.astype('uint8')).convert('RGB')
-image1_1 = np.array(image1)
-cv2.imshow('img', image1_1)
-cv2.waitKey(0)
-# image1.show()
-image2 = Image.fromarray(edges.astype('uint8')).convert('RGB')
+cv_show('img', img_)
 # image2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# ret, image2 = cv2.threshold(image2, 127, 255, cv2.THRESH_BINARY)
-image2_1 = np.array(image2)
-cv2.imshow('img', image2_1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-# image2.save("heibai.png")
+# ret, image2 = cv2.threshold(image2, 127, 255, cv2.THRESH_BINARY)#
+cv_show('img', edges)
+cv2.imwrite('heibai.png', edges)
 
-'''
 lines = cv2.HoughLinesP(edges,  # 输入图像
                         1,  # 累加器分辨率
                         np.pi / 180,  # 角度分辨率
@@ -30,19 +30,13 @@ lines = cv2.HoughLinesP(edges,  # 输入图像
                         maxLineGap=20)  # 直线上允许的最大缝隙
 line = lines[:, 0, :]
 for x1, y1, x2, y2 in line[:]:
-    cv2.line(img,  # 输入图像
+    cv2.line(img_,  # 输入图像
              (x1, y1),  # 起点
              (x2, y2),  # 终点
              (255, 0, 0),  # 颜色
              1)  # 宽度
-image1 = Image.fromarray(img.astype('uint8')).convert('RGB')
-image1_1 = np.array(image1)
-cv2.imshow('img', image1_1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-# image1.show()
-# image1.save("nihe.png")
-'''
+cv_show('img', img_)
+cv2.imwrite('nihe.png', img_)
 
 '''
 # 在黑色图像上画一条白线，
