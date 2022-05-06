@@ -74,3 +74,36 @@ def main():
 if __name__ == main():
     main()
 
+'''
+1. 生成**斐波那契数列**的前20个数。
+'''
+# 我的答案
+import numpy as np
+
+a = np.zeros(20).astype(int)
+a[0] = 1
+a[1] = 1
+for i in range(1, 19):
+    a[i + 1] = a[i - 1] + a[i]
+print(a)
+
+# 标准答案
+a = 0
+b = 1
+for _ in range(20):
+    a, b = b, a + b
+    print(a, end=' ')
+
+"""
+找出10000以内的完美数。
+"""
+
+sum_ = 0
+for i in range(1, 10000):
+    for a in range(1, i):
+        if i % a == 0:
+            sum_ = sum_ + a
+    if sum_ == i:
+        print(i)
+    sum_ = 0
+
