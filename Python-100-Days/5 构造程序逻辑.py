@@ -107,3 +107,13 @@ for i in range(1, 10000):
         print(i)
     sum_ = 0
 
+"""
+输出100以内所有的素数。
+"""
+
+for i in range(100):
+    for a in range(2, int(i ** 0.5) + 1):
+        if i % a == 0:
+            break
+        if a == i - 1:
+            print(i)
