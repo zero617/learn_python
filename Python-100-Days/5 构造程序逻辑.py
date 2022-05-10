@@ -80,11 +80,10 @@ if __name__ == main():
 # 我的答案
 import numpy as np
 
-a = np.zeros(20).astype(int)
-a[0] = 1
-a[1] = 1
-for i in range(1, 19):
-    a[i + 1] = a[i - 1] + a[i]
+a = [1, 1]
+
+for i in range(2, 20):
+    a.append(a[i - 2]+a[i-1])
 print(a)
 
 # 标准答案
