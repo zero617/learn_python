@@ -1,0 +1,34 @@
+"""练习2：定义一个类描述平面上的点并提供移动点和计算到另一个点距离的方法。"""
+
+
+class point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def move_to(self, x, y):
+        self.x = x
+        self.y = y
+
+    def move_by(self, dx, dy):
+        self.x += dx
+        self.y += dy
+
+    def distance_to(self, other):
+        dx = self.x - other.x
+        dy = self.y - other.y
+        return (dx ** 2 + dy ** 2) ** 0.5
+
+
+def main():
+    p1 = point(3, 5)
+    p2 = point(5, 7)
+    print(p1.distance_to(p2))
+    p2.move_to(9, 10)
+    print(p1.distance_to(p2))
+    p1.move_by(-2, 3)
+    print(p1.distance_to(p2))
+
+
+if __name__ == "__main__":
+    main()
